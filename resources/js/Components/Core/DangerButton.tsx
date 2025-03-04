@@ -10,9 +10,7 @@ export default function DangerButton({
         <button
             {...props}
             className={
-                `btn btn-error ${
-                    disabled && 'opacity-25'
-                } ` + className
+                `btn btn-error ` + className
             }
             disabled={disabled}
         >
