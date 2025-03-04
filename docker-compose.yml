@@ -85,7 +85,7 @@ services:
         environment:
             PMA_HOST: 'mysql'
             #PMA_ARBITRARY: '1'
-            MYSQL_ROOT_PASSWORD: '${DB_ROOT_PASSWORD}'
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             PMA_PORT: '3306'
