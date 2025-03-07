@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 use App\Enums\RolesEnum;
+use Illuminate\Database\Eloquent\Model;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -59,5 +60,10 @@ class AdminPanelProvider extends PanelProvider
       //          Authenticate::class,
       //   ])
       ;
+    }
+
+    public function boot()
+    {
+        Model::unguard();
     }
 }
