@@ -16,6 +16,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use app\Enums\RolesEnum;
+use App\Models\Departament;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Str;
@@ -120,7 +122,10 @@ class ProductResource extends Resource
 
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options(ProductStatusEnum::labels()),
+                SelectFilter::make('departament_id')
+                    ->relationship('departament', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
