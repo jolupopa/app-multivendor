@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 use Illuminate\Support\Str;
 use App\Enums\RolesEnum;
+use Illuminate\Support\Facades\Auth;
 
 
 class DepartamentResource extends Resource
@@ -82,7 +83,10 @@ class DepartamentResource extends Resource
 
     public static function canViewAny(): bool
     {
-        $user = auth()->user();
+         /** @var User $user */
+         $user = Auth::user();
+       
+       //  $user = auth()->user();
 
         return $user && $user->hasRole(RolesEnum::Admin);
 
