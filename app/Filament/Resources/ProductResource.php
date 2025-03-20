@@ -21,6 +21,7 @@ use App\Filament\Resources\ProductResource\Pages\ProductImages;
 use App\Models\Departament;
 use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Facades\Auth;
 
@@ -114,6 +115,11 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                SpatieMediaLibraryImageColumn::make('images')
+                    ->collection('images')
+                    ->limit(1)
+                    ->label('Imagen')
+                    ->conversion('thumb'),
                 Tables\Columns\TextColumn::make('title')
                     ->sortable()
                     ->words(10)

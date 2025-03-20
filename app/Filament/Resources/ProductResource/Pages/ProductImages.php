@@ -23,7 +23,7 @@ class ProductImages extends EditRecord
                     ->multiple()
                     ->openable()
                     ->panelLayout('grid')
-                    ->collection('imnages')
+                    ->collection('images')
                     ->reorderable()
                     ->appendFiles()
                     ->preserveFilenames()
