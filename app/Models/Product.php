@@ -7,20 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Support\Str;
 
 class Product extends Model implements HasMedia
 {
     use InteractsWithMedia;
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->uuid = Str::uuid(); // Generar UUID
-        });
-    }
 
     public function registerMediaConversions(?Media $media = null): void
     {

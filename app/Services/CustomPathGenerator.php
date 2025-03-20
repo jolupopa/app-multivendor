@@ -25,13 +25,12 @@ class CustomPathGenerator implements PathGenerator
 
     protected function getBasePath(Media $media): string
     {
-        // Obtener el modelo asociado
-        $model = $media->model;
-
-        // Obtener el atributo único (reemplaza 'uuid' con el nombre de tu atributo)
-        $uniqueId = $model->uuid ?? $model->id; // Usar uuid si existe, si no usar el id.
+        // Obtener el UUID directamente de la tabla media
+        $uuid = $media->uuid;
 
         // Generar el MD5
-        return md5($uniqueId . config('app.key'));
+        return md5($uuid . config('app.key'));
+        
+
     }
 }
