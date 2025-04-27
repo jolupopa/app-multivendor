@@ -14,7 +14,7 @@ function CartItem({item}: {item: CartItemType}) {
   const [error, setError] = useState('');
 
   const onDeleteClick = () => {
-    deleteForm.delete(route('cartItem.destroy', item.product_id),{
+    deleteForm.delete(route('cart.destroy', item.product_id),{
       preserveScroll: true
     })
   };
