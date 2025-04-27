@@ -9,7 +9,8 @@ function Carousel({images}: { images: Image[] }): JSX.Element {
     if (images && images.length > 0) {
       setSelectedImage(images[0]);
     }
-  }, [images.length]);
+  }, [images]);
+  
 
   return (
     <>

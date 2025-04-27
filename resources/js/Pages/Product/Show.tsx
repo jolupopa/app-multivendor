@@ -160,7 +160,7 @@ function Show({product, variationOptions}: {product: Product, variationOptions: 
           <option value={i +1} key={i+1}>Quantity: {i+1}</option>
         ))}
       </select>
-      <button onClick={addToCart} className="btn btn-primary">Add to Cart</button>
+      <button onClick={addToCart} className="btn btn-primary mt-4">Add to Cart</button>
 
     </div>)
   }
