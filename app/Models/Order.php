@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     protected $fillable = [
-        'stripe_session_id',
-        'user_id',
         'total_price',
+        'user_id',
+        'vendor_user_id',
+        'stripe_session_id',
         'status',
         'online_payment_commission',
         'website_commission',
@@ -36,7 +37,7 @@ class Order extends Model
 
     public function vendor(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'vendor_user_id', 'user_id');
-        //return $this->belongsTo(Vendor::class, 'vendor_user_id', 'user_id');
+        
+        return $this->belongsTo(Vendor::class, 'vendor_user_id', 'user_id');
     }
 }

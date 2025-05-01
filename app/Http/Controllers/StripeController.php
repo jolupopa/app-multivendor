@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Order;
 use App\Models\CartItem;
+use App\Mail\NewOrderMail;
 use Illuminate\Http\Request;
 use App\Enums\OrderStatusEnum;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\OrderViewResource;
+use App\Mail\CheckoutCompletedMail;
 
 class StripeController extends Controller
 {
@@ -100,11 +103,17 @@ class StripeController extends Controller
                     $order->vendor_subtotal = $order->total_price - $order->online_payment_commission - $order->website_commission;
                     $order->save();
 
-                    // TODO send email to vendor
+                    // send email to vendor
+                    Log::info('Intentando enviar correo de nueva orden al proveedor: ' . $order->vendorUser->email);
+                    Mail::to($order->vendorUser)->queue(new NewOrderMail($order));
+                    Log::info('Correo de nueva orden encolado (o intentado enviar).');
+
                 }
 
 
                 // send email to buyer
+                Mail::to($orders[0]->user)->queue(new CheckoutCompletedMail($orders));
+
             case 'checkout.session.completed':
                 $session = $event->data->object;
                 $pi = $session['payment_intent'];

@@ -16,10 +16,16 @@ class Vendor extends Model
         'store_name',
         'store_address',
         'store_phone',
+        'cover_image',
     ];
+
+    protected $primaryKey = 'user_id';
+    public $incrementing = false;
+    protected $keyType = 'integer';
+
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
