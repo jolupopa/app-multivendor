@@ -6,6 +6,9 @@ use App\Services\CartService;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
+use App\Custom\Interfaces\StripeConnect; // Importa la interfaz
+use App\Services\StripeService;   // Importa la implementación
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(CartService::class, function(){
             return new CartService();
         });
+
+           // Bind la interfaz StripeConnect a su implementación StripeService
+         $this->app->bind(StripeConnect::class, StripeService::class);
     }
 
     /**

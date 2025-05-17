@@ -32,7 +32,9 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "App\\Custom\\Traits\\": "custom/Traits/",
+            "App\\Custom\\Interfaces\\": "custom/Interfaces/"
         }
     },
     "autoload-dev": {

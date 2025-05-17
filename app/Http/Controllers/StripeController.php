@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\OrderViewResource;
 use App\Mail\CheckoutCompletedMail;
+use App\Models\User;
+use App\Services\StripeService;
 
 class StripeController extends Controller
 {
@@ -176,6 +178,28 @@ class StripeController extends Controller
         }
 
         return response('', 200);
+    }
+
+        public function connect(StripeService $stripeService)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $user->setStripeService($stripeService); // Inject the StripeService instance
+        if (!$user->getStripeAccountId()) {
+            $user->createStripeAccount(['type' => 'express']);
+        }
+        if (!$user->isStripeAccountActive()) {
+            return redirect($user->getStripeAccountLink());
+        }
+        return back()->with('success', 'You account is already connected');
+    }
+    public function refresh()
+    {
+        return to_route('vendor.details')->with('success', 'Stripe account is refreshed');
+    }
+    public function return()
+    {
+        return to_route('vendor.details')->with('success', 'Stripe account is connected');
     }
 
 }

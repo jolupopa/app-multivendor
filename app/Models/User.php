@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Custom\Traits\Payable;
+/**
+ * @uses \App\Traits\Payable
+ */
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles , Payable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +27,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'stripe_account_id', // Asegúrate de agregar esto
+        'stripe_account_status', // Asegúrate de agregar esto
     ];
 
     /**

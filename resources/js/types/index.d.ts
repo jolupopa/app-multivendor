@@ -5,6 +5,16 @@ export interface User {
     name: string;
     email: string;
     email_verified_at?: string;
+    stripe_account_active: boolean;
+    vendor: {
+    status: string;
+    status_label: {
+      [key: string]
+    }; // definida en AuthResource desde un array
+    store_name: string;
+    store_address: string;
+    cover_image: string;
+    }
 }
 
 export type Image = {
